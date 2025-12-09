@@ -122,37 +122,47 @@ training_args = {
 
 ---
 
-## 📈 Results & Performance
+## 📈 Results & Performance (VQA evaluation screenshots)
 
-### Model 1: Qwen 8B Instruct ⭐ Best Performance
+Below are the evaluation screenshots from each run (Exact Match (normalized), Token-level F1 (avg), Exact Match with numeric tolerance, and BERTScore (avg F1)):
 
-| Metric | Value |
-|--------|-------|
-| Overall Exact Match Accuracy | **50.35%** |
-| Closed-ended Accuracy | **78.10%** |
-| Closed-ended Precision | **78.93%** |
-| Closed-ended Recall | **70.31%** |
-| Closed-ended F1 Score | **74.37%** |
+### Model 1 — Qwen2-VL-7B (trained on 6,666 open-ended samples)
+- Exact Match (normalized): **0.3769**  
+- Token-level F1 (avg): **0.4309**  
+- BERTScore (avg F1): **0.9257**  
 
-### Model 2: Qwen3-VL-2B-Instruct
+![Qwen2-VL-7B evaluation](Images/7B-2.png)
 
-| Metric | Value |
-|--------|-------|
-| Overall Exact Match Accuracy | **43.64%** |
-| Closed-ended Accuracy | **71.63%** |
-| Closed-ended Precision | **73.59%** |
-| Closed-ended Recall | **58.02%** |
-| Closed-ended F1 Score | **64.89%** |
+---
 
-### Models 3 & 4: Performance Visualizations
+### Model 2 — Qwen2-VL-2B (trained on 6,666 open-ended samples)
+- Exact Match (normalized): **0.2084**  
+- Token-level F1 (avg): **0.2793**  
+- BERTScore (avg F1): **0.8934**  
 
-![Model v1 Performance](Images/modelv1.png)
-![Model v2 Performance](Images/modelv2.png)
+![Qwen2-VL-2B evaluation](Images/2B-2.png)
 
-### Training Loss Comparison
+---
 
-![Training Loss Comparison 1](Images/loss_train.png)
-![Training Loss Comparison 2](Images/train_loss.png)
+### Model 3 — Qwen3-VL-8B (trained on ~12,149 closed-ended samples)
+- Exact Match (normalized): **0.4590**  
+- Token-level F1 (avg): **0.4929**  
+- BERTScore (avg F1): **0.9479**  
+
+![Qwen3-VL-8B evaluation](Images/8B-3.png)
+
+---
+
+### Model 4 — Qwen3-VL-2B (trained on ~12,149 closed-ended samples)
+- Exact Match (normalized): **0.3503**  
+- Token-level F1 (avg): **0.3798**  
+- BERTScore (avg F1): **0.9436**  
+
+![Qwen3-VL-2B evaluation](Images/2b-3.png)
+
+---
+
+> **Interpretation:** Model 3 (Qwen3 8B) achieved the highest Exact Match (0.4590). Models from the Qwen2 family (Models 1 & 2), trained on fewer open-ended samples, show lower EMs but still maintain good BERTScores, indicating semantic similarity even when exact matches differ. Increasing the open-ended training samples and following the recommended two-stage training order should help close the performance gap.
 
 ---
 
@@ -161,18 +171,8 @@ training_args = {
 ### Training Strategy Recommendations
 
 1. **Always start with open-ended VQA training** to build foundational medical understanding
-2. **Use datasets with multiple images per question** for better contextual learning
-3. **Prioritize explanation-rich datasets** over simple Q&A pairs
-4. **Monitor for hallucinations** especially when transitioning to closed-ended questions
-5. **Evaluate on both open and closed-ended tasks** to ensure robust performance
-
-### Model Selection Guidelines
-
-- **For production deployment**: Qwen 8B Instruct (best overall performance)
-- **For resource-constrained environments**: Qwen3-VL-2B-Instruct (good balance)
-- **For experimentation**: Qwen2-VL-7B or Qwen-VL-2B-BNB-4bit (4-bit quantization)
-
----
+2. **Two-stage training order:** open-ended → closed-ended for best generalization.  
+3. **Increase training samples for Qwen2 models** (from 6,666 → 12k+) to close the gap.  
 
 ## 📁 Directory Structure
 

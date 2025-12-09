@@ -1,3 +1,7 @@
+'''
+GRADIO APP UI
+'''
+
 import logging
 import uuid
 from typing import List

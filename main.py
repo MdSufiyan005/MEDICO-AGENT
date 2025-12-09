@@ -1,3 +1,7 @@
+'''
+FAST API ENDPOINT 
+'''
+
 # import logging
 # import uvicorn
 # from MedAge import rag as rag_module
