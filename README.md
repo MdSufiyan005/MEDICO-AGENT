@@ -10,25 +10,10 @@
 
 ## Table of Contents
 
-- [Highlights](#highlights)
 - [Quickstart](#quickstart-local)
 - [API Endpoints](#endpoints)
 - [Project Structure](#project-structure-important-files)
 - [Fine-Tuned Vision Model](#fine-tuned-vision-model)
-- [License & Disclaimer](#license--disclaimer)
-
----
-
-## Highlights
-
-- **Chat-style API supporting**:
-  - JSON-based requests (text and explicit image paths)
-  - Swagger-friendly upload endpoint (multi-file uploads)
-- **Tooling**:
-  - `great_brain_specialist` - Fine-tuned VLM for medical image analysis
-  - `search_medical_info` - Ground answers with web search (Tavily Search API)
-  - `lung_disease_rag` - Local RAG-based retrieval for lung-specific docs
-- **Agent-based workflow** using LangChain adapters
 
 ---
 
@@ -74,16 +59,6 @@
 - `image_paths`: optional array of filesystem paths (strings)
 - `session_id`: optional
 
-### POST /chat/upload (UI Swagger)
-
-**Form fields**:
-
-- `question` (string, required)
-- `session_id` (string, optional)
-- `files` (multi-file upload, optional) — use the file chooser; do **NOT** type filenames into the array editor
-
-**Response**: `AnalysisResponse` (success, session_id, assessment, totals, search_results)
-
 ---
 
 ## Project Structure (important files)
@@ -101,8 +76,8 @@ medico-agent/
 │   └── utils.py           # Upload saving utility
 ├── Finetuning/            # Model training and evaluation
 │   └── README.md          # Detailed fine-tuning documentation
-├── main.py
-|
+├── Gradio_app.py          # Gradio interface for local testing
+├── main.py                # FastAPI app entry point
 ├── requirements.txt
 └── README.md              # This file
 ```
@@ -153,12 +128,3 @@ For comprehensive information about the model fine-tuning process, including:
 
 **Please refer to**: [`Finetuning/README.md`](Finetuning/README.md)
 
----
-
-## License & Disclaimer
-
-**⚠️ Medical Disclaimer**: This system is for research and prototyping purposes only and should not be used for clinical decision-making without proper validation and regulatory approval.
-
----
-
-**Made with ❤️ for advancing AI in healthcare**
